@@ -1,0 +1,45 @@
+#%RAML 1.0
+title: Movie Rent Service
+version: 1.0
+baseUri: http://localhost/api/V1.0
+/movies:
+  get:
+    description: Retrive all movies
+    response: 
+      200:
+        body: 
+          application/json:
+            example: |
+              {
+                "data": {
+                  "id": "1234-abcd",
+                  "name": "Pulp Fiction",
+                  "duration": 87
+                },
+                "success": true,
+                "status": 200
+              }
+/books:
+  /{bookTitle}:
+    description: "blablabla"
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {
+                  "data": {
+                    "id": "SbBGk",
+                    "title": "Stiff: The Curious Lives of Human Cadavers",
+                    "description": null,
+                    "datetime": 1341533193,
+                    "genre": "science",
+                    "author": "Mary Roach",
+                    "link": "http://e-bookmobile.com/books/Stiff"
+                  },
+                  "success": true,
+                  "status": 200
+                }
+      
+  

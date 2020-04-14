@@ -1,6 +1,6 @@
 Stage 1
 ===
-EndPoint
+EndPoints
 ---
 Ändrar en film:
 + PUT https://x.x.x.x/api/V1.0/movies/{id}
@@ -11,9 +11,6 @@ Lägga till en film:
 Hämta alla filmer eller endast en:
 + GET https://x.x.x.x/api/V1.0/movies/
 + GET https://x.x.x.x/api/V1.0/movies/{id}
-
-Hyra ut en film till en studio:
-+ POST https://x.x.x.x/api/V1.0/movies/rent/
 
 Hämta alla studios som finns registrerade även hämta endast en:
 + GET https://x.x.x.x/api/V1.0/studios/
