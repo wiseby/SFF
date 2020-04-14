@@ -1,0 +1,13 @@
+/home/wiseby/SourceCode/Projects/SFF_API_V1/src/ConsoleClient/bin/Debug/netcoreapp3.1/ConsoleClient
+/home/wiseby/SourceCode/Projects/SFF_API_V1/src/ConsoleClient/bin/Debug/netcoreapp3.1/ConsoleClient.deps.json
+/home/wiseby/SourceCode/Projects/SFF_API_V1/src/ConsoleClient/bin/Debug/netcoreapp3.1/ConsoleClient.runtimeconfig.json
+/home/wiseby/SourceCode/Projects/SFF_API_V1/src/ConsoleClient/bin/Debug/netcoreapp3.1/ConsoleClient.runtimeconfig.dev.json
+/home/wiseby/SourceCode/Projects/SFF_API_V1/src/ConsoleClient/bin/Debug/netcoreapp3.1/ConsoleClient.dll
+/home/wiseby/SourceCode/Projects/SFF_API_V1/src/ConsoleClient/bin/Debug/netcoreapp3.1/ConsoleClient.pdb
+/home/wiseby/SourceCode/Projects/SFF_API_V1/src/ConsoleClient/obj/Debug/netcoreapp3.1/ConsoleClient.csprojAssemblyReference.cache
+/home/wiseby/SourceCode/Projects/SFF_API_V1/src/ConsoleClient/obj/Debug/netcoreapp3.1/ConsoleClient.csproj.CoreCompileInputs.cache
+/home/wiseby/SourceCode/Projects/SFF_API_V1/src/ConsoleClient/obj/Debug/netcoreapp3.1/ConsoleClient.AssemblyInfoInputs.cache
+/home/wiseby/SourceCode/Projects/SFF_API_V1/src/ConsoleClient/obj/Debug/netcoreapp3.1/ConsoleClient.AssemblyInfo.cs
+/home/wiseby/SourceCode/Projects/SFF_API_V1/src/ConsoleClient/obj/Debug/netcoreapp3.1/ConsoleClient.dll
+/home/wiseby/SourceCode/Projects/SFF_API_V1/src/ConsoleClient/obj/Debug/netcoreapp3.1/ConsoleClient.pdb
+/home/wiseby/SourceCode/Projects/SFF_API_V1/src/ConsoleClient/obj/Debug/netcoreapp3.1/ConsoleClient.genruntimeconfig.cache

@@ -1,0 +1,4 @@
+/home/wiseby/SourceCode/Projects/SFF_API_V1/tests/DomainTests/obj/Debug/netcoreapp3.1/DomainTests.csprojAssemblyReference.cache
+/home/wiseby/SourceCode/Projects/SFF_API_V1/tests/DomainTests/obj/Debug/netcoreapp3.1/DomainTests.csproj.CoreCompileInputs.cache
+/home/wiseby/SourceCode/Projects/SFF_API_V1/tests/DomainTests/obj/Debug/netcoreapp3.1/DomainTests.AssemblyInfoInputs.cache
+/home/wiseby/SourceCode/Projects/SFF_API_V1/tests/DomainTests/obj/Debug/netcoreapp3.1/DomainTests.AssemblyInfo.cs
