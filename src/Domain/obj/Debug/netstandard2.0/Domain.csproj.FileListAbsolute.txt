@@ -1,9 +1,0 @@
-/home/wiseby/SourceCode/Projects/SFF_API_V1/src/Domain/bin/Debug/netstandard2.0/Domain.deps.json
-/home/wiseby/SourceCode/Projects/SFF_API_V1/src/Domain/bin/Debug/netstandard2.0/Domain.dll
-/home/wiseby/SourceCode/Projects/SFF_API_V1/src/Domain/bin/Debug/netstandard2.0/Domain.pdb
-/home/wiseby/SourceCode/Projects/SFF_API_V1/src/Domain/obj/Debug/netstandard2.0/Domain.csprojAssemblyReference.cache
-/home/wiseby/SourceCode/Projects/SFF_API_V1/src/Domain/obj/Debug/netstandard2.0/Domain.csproj.CoreCompileInputs.cache
-/home/wiseby/SourceCode/Projects/SFF_API_V1/src/Domain/obj/Debug/netstandard2.0/Domain.AssemblyInfoInputs.cache
-/home/wiseby/SourceCode/Projects/SFF_API_V1/src/Domain/obj/Debug/netstandard2.0/Domain.AssemblyInfo.cs
-/home/wiseby/SourceCode/Projects/SFF_API_V1/src/Domain/obj/Debug/netstandard2.0/Domain.dll
-/home/wiseby/SourceCode/Projects/SFF_API_V1/src/Domain/obj/Debug/netstandard2.0/Domain.pdb
