@@ -91,7 +91,7 @@ Requirements:
 ### StudioHandler:
 
 * Studio Name should not be null or empty.
-* Studio Location should have a lication.
+* Studio Location should not be null or empty.
 * Can create a Studio and make it persistant.
 * Can remove a studio.
 * Can make changes to studio Name and Location.

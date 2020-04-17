@@ -1,25 +1,29 @@
 using Microsoft.AspNetCore.Mvc;
 using Domain;
 using System.Collections.Generic;
+using Persistence;
 
 namespace API.Controllers
 {
-    [Route("api/V1.0/[controller]")]
+    [Route("api/V1.0/studios")]
     [ApiController]
     public class StudiosController : ControllerBase
     {
-        public StudiosController()
+        private DataContext context;
+
+        public StudiosController(DataContext context)
         {
-            
+            this.context = context;
         }
 
         [HttpGet]
         public ActionResult<List<Studio>> GetAllStudios()
         {
+            
             return Ok();
         }
 
-        [HttpGet("/{id}")]
+        [HttpGet("{id}")]
         public ActionResult<Studio> GetStudioById(int id)
         {
             return Ok();
@@ -31,13 +35,13 @@ namespace API.Controllers
             return Ok();
         }
 
-        [HttpPut("/{id}")]
+        [HttpPut("{id}")]
         public ActionResult<Studio> ModifyStudio(int id)
         {
             return Ok();
         }
 
-        [HttpDelete("/{id}")]
+        [HttpDelete("{id}")]
         public ActionResult<Studio> RemoveStudio(int id)
         {
             return Ok();

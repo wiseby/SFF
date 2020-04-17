@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [Route("api/V1.0/[controller]")]
+    [Route("api/V1.0/rentservice")]
     [ApiController]
     public class RentServiceController : ControllerBase
     {
@@ -11,13 +11,13 @@ namespace API.Controllers
             
         }
 
-        [HttpPost("/rent")]
+        [HttpPost("rent")]
         public IActionResult RentMovie(int movieId, int studioId)
         {
             return Ok();
         }
 
-        [HttpPost("/return")]
+        [HttpPost("return")]
         public IActionResult ReturnMovie(int movieId, int studioId)
         {
             return Ok();

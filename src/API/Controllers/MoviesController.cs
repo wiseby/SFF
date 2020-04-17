@@ -1,41 +1,53 @@
 using Microsoft.AspNetCore.Mvc;
-using Application;
 using System.Collections.Generic;
 using Domain;
+using Application.Products;
+using System.Threading.Tasks;
 
 namespace API.Controllers
 {
-    [Route("api/V1.0/[controller]")]
+    [Route("api/V1.0/movies")]
     [ApiController]
     public class MoviesController : ControllerBase
     {
-        public MoviesController()
+        private readonly IProductHandler<Movie> handler;
+        public MoviesController(IProductHandler<Movie> handler)
         {
-        
+            this.handler = handler;
         }
 
         [HttpGet]
-        public ActionResult<List<Movie>> GetMovies()
+        public async Task<ActionResult<List<Movie>>> GetMovies()
         {
-            return Ok();
+            var movies = await handler.GetAll();
+            return Ok(movies);
         }
 
-        [HttpGet("/{id}")]
-        public ActionResult<Movie> GetMovieById(int id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Movie>> GetMovieById(int id)
         {
-            return Ok();
+            var movie = await handler.GetSingle(id);
+            return Ok(movie);
         }
 
         [HttpPost]
-        public ActionResult<Movie> CreateMovie(Movie movie)
+        public async Task<ActionResult<Movie>> CreateMovie(Movie movie)
         {
-            return Ok();
+            var newMovie = await handler.Create(movie);
+            return Ok(movie);
         }
 
         [HttpPut("{id}")]
         public ActionResult<Movie> ModifiyMovie(int id)
         {
             return Ok();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Movie>> DeleteMovie(int id)
+        {
+            var movie = await handler.Delete(id);
+            return Ok(movie);
         }
     }
 }
