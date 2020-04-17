@@ -27,8 +27,9 @@ namespace Application.Products
 
         public async Task<Movie> GetSingle(int id)
         {
-            var movie = await context.Movies.FindAsync(id);
-            return movie;
+            var movie = await context.Movies.FirstOrDefaultAsync(m => m.Id == id);
+            if (movie != null) { return movie; }
+            throw new Exception("Couldn't find studio with that id");
         }
 
         public async Task<Movie> Create(Movie product)
@@ -68,6 +69,47 @@ namespace Application.Products
 
             if (success) { return oldMovie; }
             throw new Exception("Problem saving changes!");
+        }
+
+        public async Task<Movie> AddReview(int movieId, Review review)
+        {
+            var movie = await context.Movies.FirstOrDefaultAsync(m => m.Id == movieId);
+            movie.Reviews.Add(review);
+            // TODO:Is Review complete? Make validations for Customer != null
+            var success = await context.SaveChangesAsync() > 0;
+
+            if (success) { return movie; }
+            throw new Exception("Problem saving changes!");
+        }
+
+        public async Task<Movie> AddTrivia(int movieId, Trivia trivia)
+        {
+            var movie = await GetSingle(movieId);
+            movie.Trivias.Add(trivia);
+
+            context.Movies.Update(movie);
+
+            var success = await context.SaveChangesAsync() > 0;
+            if (success) { return movie; }
+            throw new Exception("Could not update movie after adding tirvia");
+        }
+
+        public async Task<Movie> RemoveTrivia(int movieId, int triviaId)
+        {
+            var movie = await GetSingle(movieId);
+            var triviaToRemove = movie.Trivias.FirstOrDefault(
+                t => t.Id == triviaId);
+            if (triviaToRemove == null) 
+            {
+                throw new Exception($"Trivia with id {triviaId} was not found");
+            }
+            movie.Trivias.Remove(triviaToRemove);
+
+            context.Movies.Update(movie);
+
+            var success = await context.SaveChangesAsync() > 0;
+            if (success) { return movie; }
+            throw new Exception("Could not update movie after deleting tirvia");
         }
     }
 }

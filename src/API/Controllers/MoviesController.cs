@@ -50,5 +50,21 @@ namespace API.Controllers
             var movie = await handler.Delete(id);
             return Ok(movie);
         }
+
+        [HttpPost]
+        [Route("{movieId}/reviews/")]
+        public async Task<ActionResult<Review>> CreateReview(int movieId, Review review)
+        {
+            var result = await handler.AddReview(movieId, review);
+            return Ok(result);
+        }
+
+        [HttpPost]
+        [Route("{movieId}/trivias/")]
+        public async Task<ActionResult<Movie>> CreateTrivia(int movieId, Trivia trivia)
+        {
+            var result = await handler.AddTrivia(movieId, trivia);
+            return Ok(result);
+        }
     }
 }

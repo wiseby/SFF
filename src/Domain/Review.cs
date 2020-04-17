@@ -4,6 +4,7 @@ namespace Domain
 {
     public class Review
     {
+        public int Id { get; set; }
         private int rating;
         public int Rating
         {
@@ -30,7 +31,5 @@ namespace Domain
         public DateTime CreateDate { get; set; }
         public int AuthorId { get; set; }
         public ICustomer Author { get; set; }
-        public int ProductId { get; set; }
-        public IProduct Product { get; set; }
     }
 }
