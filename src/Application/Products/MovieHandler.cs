@@ -55,17 +55,19 @@ namespace Application.Products
 
             // Return results
             if (success) { return result.Entity; }
-            throw new Exception("Problem saveing changes!");
+            throw new Exception("Problem saving changes!");
         }
 
         public async Task<Movie> Update(int id, Movie updatedMovie)
         {
-            var movie = await context.Movies.FindAsync(id);
-            var result = context.Movies.Update(updatedMovie);
+            var oldMovie = await GetSingle(id);
+            oldMovie.Name = updatedMovie.Name;
+            oldMovie.Category = updatedMovie.Category;
+            var result = context.Movies.Update(oldMovie);
             var success = await context.SaveChangesAsync() > 0;
 
-            if (success) { return movie; }
-            throw new Exception("Problem saveing changes!");
+            if (success) { return oldMovie; }
+            throw new Exception("Problem saving changes!");
         }
     }
 }

@@ -38,9 +38,10 @@ namespace API.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult<Movie> ModifiyMovie(int id)
+        public async Task<ActionResult<Movie>> ModifiyMovie(int id, Movie movie)
         {
-            return Ok();
+            var result = await handler.Update(id, movie);
+            return Ok(result);
         }
 
         [HttpDelete("{id}")]
