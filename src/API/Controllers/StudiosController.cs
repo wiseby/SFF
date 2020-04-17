@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Domain;
 using System.Collections.Generic;
-using Persistence;
+using Application.Customers;
+using System.Threading.Tasks;
 
 namespace API.Controllers
 {
@@ -9,42 +10,46 @@ namespace API.Controllers
     [ApiController]
     public class StudiosController : ControllerBase
     {
-        private DataContext context;
+        private readonly ICustomerHandler<Studio> handler;
 
-        public StudiosController(DataContext context)
+        public StudiosController(ICustomerHandler<Studio> handler)
         {
-            this.context = context;
+            this.handler = handler;
         }
 
         [HttpGet]
-        public ActionResult<List<Studio>> GetAllStudios()
+        public async Task<ActionResult<List<Studio>>> GetAllStudios()
         {
-            
-            return Ok();
+            var studios = await handler.GetAll();
+            return Ok(studios);
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Studio> GetStudioById(int id)
+        public async Task<ActionResult<Studio>> GetStudioById(int id)
         {
-            return Ok();
+            var studio = await handler.GetSingle(id);
+            return Ok(studio);
         }
 
         [HttpPost]
-        public ActionResult<Studio> CreateStudio()
+        public async Task<ActionResult<Studio>> CreateStudio(Studio studio)
         {
-            return Ok();
+            var result = await handler.Create(studio);
+            return Ok(result);
         }
 
         [HttpPut("{id}")]
-        public ActionResult<Studio> ModifyStudio(int id)
+        public async Task<ActionResult<Studio>> ModifyStudio(int id, Studio studio)
         {
-            return Ok();
+            var result = await handler.Update(id, studio);
+            return Ok(result);
         }
 
         [HttpDelete("{id}")]
-        public ActionResult<Studio> RemoveStudio(int id)
+        public async Task<ActionResult<Studio>> RemoveStudio(int id)
         {
-            return Ok();
+            var result = await handler.Delete(id);
+            return Ok(result);
         }
     }
 }

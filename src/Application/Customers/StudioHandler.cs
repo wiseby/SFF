@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Domain;
+using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 namespace Application.Customers
@@ -17,34 +19,48 @@ namespace Application.Customers
             customers = new List<ICustomer>();
         }
 
-
-        public void Add(ICustomer customer)
+        public async Task<List<Studio>> GetAll()
         {
-            customers.Add(customer);
+            var studios = await context.Studios.ToListAsync();
+            if (studios.Count > 0) { return studios; }
+            throw new Exception("No data contained in database");
         }
 
-        public void ChangeStudioInfo(int id, string[] data)
+        public async Task<Studio> GetSingle(int id)
         {
-            var customer = customers.Find(o => o.Id == id);
-            if (customer == null) { throw new ArgumentNullException(); }
-            if(data[0] != null) { customer.Title = data[0]; }
-            if(data[1] != null) { customer.Location = data[1]; }
+            var studio = await context.Studios.FirstOrDefaultAsync(
+                s => s.Id == id);
+            if (studio != null) { return studio; }
+            throw new Exception("Couldn't find studio with that id");
         }
 
-        public List<ICustomer> GetAll()
+        public async Task<Studio> Create(Studio studio)
         {
-            return customers;
+            await context.Studios.AddAsync(studio);
+            var success = await context.SaveChangesAsync() > 0;
+            if (success) { return studio; }
+            throw new Exception("Failed to create customer");
         }
 
-        public void RemoveStudio(int id)
+        public async Task<Studio> Delete(int id)
         {
-            var studio = customers.Find(s => s.Id == id);
-            customers.Remove(studio);
+            var studio = await GetSingle(id);
+            context.Remove(studio);
+            var success = await context.SaveChangesAsync() > 0;
+            if (success) { return studio; }
+            throw new Exception("Failed to delete customer");
         }
 
-        public void ChangeInfo(ICustomer customer, string[] data)
+        public async Task<Studio> Update(int id, Studio newStudio)
         {
-            throw new NotImplementedException();
+            var studioToEdit = await GetSingle(id);
+            studioToEdit.Name = newStudio.Name;
+            studioToEdit.Location = newStudio.Location;
+            context.Studios.Update(studioToEdit);
+            var success = await context.SaveChangesAsync() > 0;
+            
+            if (success) { return studioToEdit; }
+            throw new Exception("Failed to update studio");
         }
     }
 }
