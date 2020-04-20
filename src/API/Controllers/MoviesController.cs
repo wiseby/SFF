@@ -60,10 +60,17 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        [Route("{movieId}/trivias/")]
-        public async Task<ActionResult<Movie>> CreateTrivia(int movieId, Trivia trivia)
+        [Route("trivias/")]
+        public async Task<ActionResult<ProductDto>> CreateTrivia([FromBody] Trivia trivia)
         {
-            var result = await handler.AddTrivia(movieId, trivia);
+            var result = await handler.AddTrivia(trivia);
+            return Ok(result);
+        }
+
+        [HttpDelete("{movieId}/trivias/{triviaId}")]
+        public async Task<ActionResult<ProductDto>> DeleteTrivia(int movieId, int triviaId)
+        {
+            var result = await handler.RemoveTrivia(movieId, triviaId);
             return Ok(result);
         }
     }
