@@ -46,15 +46,11 @@ namespace Application.Products
 
         public async Task<Movie> Delete(int id)
         {
-            // Find movie by id
             var movie = await context.Movies.FindAsync(id);
-
-            // Delete movie
             var result = context.Movies.Remove(movie);
 
             var success = await context.SaveChangesAsync() > 0;
 
-            // Return results
             if (success) { return result.Entity; }
             throw new Exception("Problem saving changes!");
         }
@@ -74,8 +70,9 @@ namespace Application.Products
         public async Task<Movie> AddReview(int movieId, Review review)
         {
             var movie = await context.Movies.FirstOrDefaultAsync(m => m.Id == movieId);
+            var authorExists = await context.Studios.FindAsync(review.AuthorId) != null;
+            if(!authorExists) { throw new Exception("Author doesn't exist"); }
             movie.Reviews.Add(review);
-            // TODO:Is Review complete? Make validations for Customer != null
             var success = await context.SaveChangesAsync() > 0;
 
             if (success) { return movie; }

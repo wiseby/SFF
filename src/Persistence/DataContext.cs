@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Domain;
+using System;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Persistence
 {
@@ -15,7 +17,13 @@ namespace Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Review>().Ignore(r => r.Author);
+            // var converter = new CastingConverter<ICustomer, DefaultCustomer>();
+            // modelBuilder.Entity<Review>(entity => {
+            //     entity.Property(p => p.CreateDate)
+            //     .HasDefaultValue(DateTime.Now);
+            //     entity.Property(p => p.Customer)
+            //     .HasConversion(converter);
+            // });
         }
     }
 }

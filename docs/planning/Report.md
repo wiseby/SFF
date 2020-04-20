@@ -34,3 +34,21 @@ The startup project and target project are often the same project. A typical sce
 
 It's also possible to put migrations code in a class library separate from the EF Core context.
 ```
+
+I also had problem when I declared a models property with an Interface Type. My thought was to connvert into a cocrete class for modellig purposes but then the point of having a inteface was gone.
+
+My solution was this:
+----
+```
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    var converter = new CastingConverter<ICustomer, DefaultCustomer>();
+    modelBuilder.Entity<Review>(entity => {
+        entity.Property(p => p.CreateDate)
+        .HasDefaultValue(DateTime.Now);
+        entity.Property(p => p.Customer)
+        .HasConversion(converter);
+    });
+}
+```
+But I ended up not going with interfaces at all! Making my life a little simpler and dull!

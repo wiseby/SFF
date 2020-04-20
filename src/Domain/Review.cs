@@ -17,19 +17,27 @@ namespace Domain
         }
 
         private string comment;
-        public string Comment { 
-                get { return comment; } 
-                set 
-                { 
-                    if (value.Length > 40) { comment = value; }
-                    else { 
-                        throw new Exception(
-                            "Comment needs to be longer than 40 characters"); 
-                        }
-                } 
+        public string Comment
+        {
+            get { return comment; }
+            set
+            {
+                if (value.Length > 40) { comment = value; }
+                else
+                {
+                    throw new Exception(
+                        "Comment needs to be longer than 40 characters");
+                }
             }
-        public DateTime CreateDate { get; set; }
+        }
+
+        private DateTime createDate;
+        public DateTime CreateDate
+        {
+            get { return createDate; }
+            set { createDate = DateTime.Now; }
+        }
         public int AuthorId { get; set; }
-        public ICustomer Author { get; set; }
+        public DefaultCustomer Author { get; set; }
     }
 }
