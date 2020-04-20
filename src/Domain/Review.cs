@@ -37,7 +37,9 @@ namespace Domain
             get { return createDate; }
             set { createDate = DateTime.Now; }
         }
+        public int MovieId { get; set; }
+        public Movie Movie { get; set; }
         public int AuthorId { get; set; }
-        public DefaultCustomer Author { get; set; }
+        public Studio Author { get; set; }
     }
 }

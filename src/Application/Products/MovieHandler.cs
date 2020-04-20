@@ -58,7 +58,7 @@ namespace Application.Products
         public async Task<Movie> Update(int id, Movie updatedMovie)
         {
             var oldMovie = await GetSingle(id);
-            oldMovie.Name = updatedMovie.Name;
+            oldMovie.Title = updatedMovie.Title;
             oldMovie.Category = updatedMovie.Category;
             var result = context.Movies.Update(oldMovie);
             var success = await context.SaveChangesAsync() > 0;

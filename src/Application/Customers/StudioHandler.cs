@@ -9,14 +9,14 @@ namespace Application.Customers
 {
     public class StudioHandler : ICustomerHandler<Studio>
     {
-        private List<ICustomer> customers;
+        private List<Studio> customers;
         private readonly DataContext context;
 
 
         public StudioHandler(DataContext context)
         {
             this.context = context;
-            customers = new List<ICustomer>();
+            customers = new List<Studio>();
         }
 
         public async Task<List<Studio>> GetAll()

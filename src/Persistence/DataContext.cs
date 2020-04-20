@@ -17,13 +17,6 @@ namespace Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // var converter = new CastingConverter<ICustomer, DefaultCustomer>();
-            // modelBuilder.Entity<Review>(entity => {
-            //     entity.Property(p => p.CreateDate)
-            //     .HasDefaultValue(DateTime.Now);
-            //     entity.Property(p => p.Customer)
-            //     .HasConversion(converter);
-            // });
         }
     }
 }

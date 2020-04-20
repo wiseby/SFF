@@ -16,49 +16,21 @@ namespace Persistence.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.3");
 
-            modelBuilder.Entity("Domain.DefaultCustomer", b =>
+            modelBuilder.Entity("Domain.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Location")
+                    b.Property<string>("Description")
                         .HasColumnType("TEXT");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DefaultCustomer");
-                });
-
-            modelBuilder.Entity("Domain.DefaultProduct", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("DefaultCustomerId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("LicensesTotal")
-                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
-                    b.Property<float>("Price")
-                        .HasColumnType("REAL");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("DefaultCustomerId");
-
-                    b.ToTable("DefaultProduct");
+                    b.ToTable("Category");
                 });
 
             modelBuilder.Entity("Domain.Movie", b =>
@@ -67,14 +39,11 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Category")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("LicensesTotal")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("Licenses")
+                        .HasColumnType("INTEGER");
 
                     b.Property<float>("Price")
                         .HasColumnType("REAL");
@@ -82,7 +51,12 @@ namespace Persistence.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Title")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Movies");
                 });
@@ -102,10 +76,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("DefaultProductId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("MovieId")
+                    b.Property<int>("MovieId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Rating")
@@ -114,8 +85,6 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AuthorId");
-
-                    b.HasIndex("DefaultProductId");
 
                     b.HasIndex("MovieId");
 
@@ -151,9 +120,6 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("DefaultProductId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("MovieId")
                         .HasColumnType("INTEGER");
 
@@ -162,43 +128,37 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DefaultProductId");
-
                     b.HasIndex("MovieId");
 
                     b.ToTable("Trivia");
                 });
 
-            modelBuilder.Entity("Domain.DefaultProduct", b =>
+            modelBuilder.Entity("Domain.Movie", b =>
                 {
-                    b.HasOne("Domain.DefaultCustomer", null)
-                        .WithMany("Procucts")
-                        .HasForeignKey("DefaultCustomerId");
+                    b.HasOne("Domain.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.Review", b =>
                 {
-                    b.HasOne("Domain.DefaultCustomer", "Author")
+                    b.HasOne("Domain.Studio", "Author")
                         .WithMany()
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.DefaultProduct", null)
+                    b.HasOne("Domain.Movie", "Movie")
                         .WithMany("Reviews")
-                        .HasForeignKey("DefaultProductId");
-
-                    b.HasOne("Domain.Movie", null)
-                        .WithMany("Reviews")
-                        .HasForeignKey("MovieId");
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.Trivia", b =>
                 {
-                    b.HasOne("Domain.DefaultProduct", null)
-                        .WithMany("Trivias")
-                        .HasForeignKey("DefaultProductId");
-
                     b.HasOne("Domain.Movie", "Movie")
                         .WithMany("Trivias")
                         .HasForeignKey("MovieId")

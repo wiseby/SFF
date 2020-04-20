@@ -4,7 +4,7 @@ namespace Application.RentService
 {
     public interface IRentService
     {
-         public void Rent(ICustomer customer, IProduct product);
-         public void Return(ICustomer customer, IProduct product);
+         public void Rent(Studio customer, Movie product);
+         public void Return(Studio customer, Movie product);
     }
 }
