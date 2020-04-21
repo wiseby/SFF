@@ -10,30 +10,15 @@
 			"item": [
 				{
 					"name": "Get All Movies",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "{{URL}}/movies/",
-							"host": [
-								"{{URL}}"
-							],
-							"path": [
-								"movies",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create New Movies Seed",
-					"request": {
-						"method": "POST",
-						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "[\n\t{\n\t\t\"title\": \"Pulp Fiction\",\n\t\t\"duration\": 112,\n\t\t\"license\": 5\n\t},\n\t{\n\t\t\"title\": \"Babe\",\n\t\t\"duration\": 112,\n\t\t\"license\": 5\n\t},\n\t{\n\t\t\"title\": \"Batman\",\n\t\t\"duration\": 130,\n\t\t\"license\": 5\n\t},\n\t{\n\t\t\"title\": \"Jurassic Park\",\n\t\t\"duration\": 127,\n\t\t\"license\": 5\n\t},\n\t{\n\t\t\"title\": \"Guardians Of The Galaxy\",\n\t\t\"duration\": 110,\n\t\t\"license\": 2\n\t},\n\t{\n\t\t\"title\": \"Iron Man\",\n\t\t\"duration\": 111,\n\t\t\"license\": 10\n\t},\n\t{\n\t\t\"title\": \"Shaun The Sheep\",\n\t\t\"duration\": 68,\n\t\t\"license\": 5\n\t},\n\t{\n\t\t\"title\": \"Pulp Fiction\",\n\t\t\"duration\": 43,\n\t\t\"license\": 3\n\t},\n\t{\n\t\t\"title\": \"Lord Of The Rigns\",\n\t\t\"duration\": 310,\n\t\t\"license\": 9\n\t},\n\t{\n\t\t\"title\": \"Back To The Future\",\n\t\t\"duration\": 87,\n\t\t\"license\": 1\n\t}\n]",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -41,13 +26,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{URL}}/movies/",
+							"raw": "{{URL}}/movies",
 							"host": [
 								"{{URL}}"
 							],
 							"path": [
-								"movies",
-								""
+								"movies"
 							]
 						}
 					},
@@ -60,7 +44,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"title\": \"MovieTitleChanged\",\n\t\"duration\": \"34\"\n}",
+							"raw": "{\n\t\"name\": \"New Movie Title\",\n\t\"category\": \"New Category\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -68,12 +52,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{URL}}/studios/1",
+							"raw": "{{URL}}/movies/1",
 							"host": [
 								"{{URL}}"
 							],
 							"path": [
-								"studios",
+								"movies",
 								"1"
 							]
 						}
@@ -82,12 +66,26 @@
 				},
 				{
 					"name": "Create New Single Movie",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "597453db-70a3-44c6-8cc3-5c789bf62032",
+								"exec": [
+									"var d = new Date();",
+									"",
+									"pm.environment.set(\"currentDate\", d.getDate());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"title\": \"A New Movie\",\n\t\"duration\": 666\n}",
+							"raw": "{\n\t\"name\": \"Second best movie\",\n\t\"CategoryId\": 2\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -102,6 +100,42 @@
 							"path": [
 								"movies",
 								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Movie",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/movies/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"movies",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Movie",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/movies/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"movies",
+								"1"
 							]
 						}
 					},
@@ -120,7 +154,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"movieId\": 2,\n\t\"TextContent\": \"Adding a Trivia\"\n}",
+							"raw": "{\n\t\"title\": \"Jag har inte sett denna film\",\n\t\"content\": \"Är den här filmen bra?\",\n\t\"movieId\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -128,13 +162,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{URL}}/movies/2/trivias/",
+							"raw": "{{URL}}/movies/trivias/",
 							"host": [
 								"{{URL}}"
 							],
 							"path": [
 								"movies",
-								"2",
 								"trivias",
 								""
 							]
@@ -148,13 +181,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{URL}}/movies/2/trivias/",
+							"raw": "{{URL}}/movies/1/trivias/",
 							"host": [
 								"{{URL}}"
 							],
 							"path": [
 								"movies",
-								"2",
+								"1",
 								"trivias",
 								""
 							]
@@ -167,14 +200,25 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{URL}}/trivias/2",
+							"raw": "{{URL}}/movies/1/trivias/10",
 							"host": [
 								"{{URL}}"
 							],
 							"path": [
+								"movies",
+								"1",
 								"trivias",
-								"2"
+								"10"
 							]
 						}
 					},
@@ -213,7 +257,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"Rating\": 3.1,\n\t\"Comment\": \"This movie just got a review! A bad one!\",\n\t\"studioId\": 2\n}",
+							"raw": "{\n\t\"Rating\": 3,\n\t\"Comment\": \"This movie just got a review! A bad one! More characters needed!!!!\",\n\t\"reviewerId\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -248,6 +292,35 @@
 							"path": [
 								"movies",
 								"2",
+								"reviews",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Review for Movie",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"rating\": 12,\n\t\"comment\": \"Really good movie that is great and now the comment is more than 40 chars\",\n\t\"authorId\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/movies/1/reviews/",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"movies",
+								"1",
 								"reviews",
 								""
 							]
@@ -307,33 +380,6 @@
 					"response": []
 				},
 				{
-					"name": "Create New Studios Seed",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "[\n\t{\n\t\t\"name\": \"StudioOne\",\n\t\t\"location\": \"Location\"\n\t},\t\n\t{\n\t\t\"name\": \"StudioTwo\",\n\t\t\"location\": \"Location\"\n\t},\t\n\t{\n\t\t\"name\": \"StudioThree\",\n\t\t\"location\": \"Location\"\n\t},\t\n\t{\n\t\t\"name\": \"StudioFour\",\n\t\t\"location\": \"Location\"\n\t},\t\n\t{\n\t\t\"name\": \"StudioFive\",\n\t\t\"location\": \"Location\"\n\t},\t\n\t{\n\t\t\"name\": \"StudioSix\",\n\t\t\"location\": \"Location\"\n\t}\n]",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{URL}}/studios/",
-							"host": [
-								"{{URL}}"
-							],
-							"path": [
-								"studios",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Change Studio Info",
 					"request": {
 						"method": "PUT",
@@ -364,22 +410,136 @@
 			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "Get Movie",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{URL}}/movies/1",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"movies",
-						"1"
-					]
+			"name": "RentService",
+			"item": [
+				{
+					"name": "Rent",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"studioId\": 1,\n\t\"movieId\": [2]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/rentservice/rent",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"rentservice",
+								"rent"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Return",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"studioId\": 1,\n\t\n\t\"movieId\": \n\t[\n\t\t2\n\t]\n\t\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/rentservice/return",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"rentservice",
+								"return"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Order By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/rentservice/orders/?studioId=1&invoiceId=1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"rentservice",
+								"orders",
+								""
+							],
+							"query": [
+								{
+									"key": "studioId",
+									"value": "1"
+								},
+								{
+									"key": "invoiceId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Order By Id In XML",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/rentservice/orders/1.xml",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"rentservice",
+								"orders",
+								"1.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Studio Orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/rentservice/orders?studioId=1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"rentservice",
+								"orders"
+							],
+							"query": [
+								{
+									"key": "studioId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"event": [
@@ -406,9 +566,9 @@
 	],
 	"variable": [
 		{
-			"id": "028db719-44eb-4bda-9bea-e6a661663fed",
-			"key": "URI",
-			"value": "https://localhost/api/V1.0/",
+			"id": "4c205d01-0850-43ee-a272-975b601426cd",
+			"key": "URL",
+			"value": "localhost:5000/api/V1.0",
 			"type": "string"
 		}
 	],

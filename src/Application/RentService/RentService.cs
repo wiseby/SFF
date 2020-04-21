@@ -82,6 +82,24 @@ namespace Application.RentService
         }
 
 
+        public InvoiceLabelDto GetLabelForInvoice(int invoiceId)
+        {
+            var invoice = (from i in invoices
+                           where i.Id == invoiceId
+                           select i).FirstOrDefault();
+
+            var label = new InvoiceLabelDto();
+            label.FilmNamn = new List<string>();
+            label.Ort = $"Kund med Id: {invoice.StudioId}. Kolla du upp orten tack!";
+            label.Datum = DateTime.Now;
+            foreach (var line in invoice.InvoiceLines)
+            {
+                label.FilmNamn.Add($"Film med Id: {line.ProductId}. Gå och kolla arkivet :P");
+            }
+            return label;
+        }
+
+
         public async Task<InvoiceDto> Rent(int customerId, int[] movieId)
         {
             Studio customer;

@@ -7,6 +7,7 @@ namespace API.Controllers
 
     [Route("api/V1.0/rentservice")]
     [ApiController]
+    [FormatFilter]
     public class RentServiceController : ControllerBase
     {
         private readonly IRentService service;
@@ -16,15 +17,6 @@ namespace API.Controllers
             this.service = service;
             
         }
-
-        // [HttpGet]
-        // [Route("orders")]
-        // public IActionResult GetStudioInvoices(
-        //     [FromQuery] int studioId)
-        // {
-        //     var result = service.GetInvoicesByStudio(studioId);
-        //     return Ok(result);
-        // }
 
 
         [HttpGet]
@@ -37,14 +29,13 @@ namespace API.Controllers
         }
 
 
-        // [HttpGet]
-        // [Route("orders")]
-        // public IActionResult GetStudioInvoices(
-        //     [FromQuery] int studioId, [FromQuery] int invoiceId)
-        // {
-        //     var result = service.GetSingelInvoiceByStudio(studioId, invoiceId);
-        //     return Ok(result);
-        // }
+        [HttpGet]
+        [Route("orders/{orderId}.{format?}")]
+        public IActionResult GetOrderLabel(int orderId)
+        {
+            var result = service.GetLabelForInvoice(orderId);
+            return Ok(result);
+        }
 
 
         [HttpPost("rent")]

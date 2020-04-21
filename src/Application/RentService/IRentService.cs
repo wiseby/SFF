@@ -11,5 +11,6 @@ namespace Application.RentService
         public Task<List<InvoiceLineDto>> Return(int customerId, int[] productId);
         public List<InvoiceDto> GetInvoicesByStudio(int studioId);
         public InvoiceDto GetSingelInvoiceByStudio(int studioId, int orderId);
+        public InvoiceLabelDto GetLabelForInvoice(int invoiceId);
     }
 }
