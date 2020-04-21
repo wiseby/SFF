@@ -1,13 +1,18 @@
+using Application.RentService;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+
     [Route("api/V1.0/rentservice")]
     [ApiController]
     public class RentServiceController : ControllerBase
     {
-        public RentServiceController()
+        private readonly IRentService service;
+
+        public RentServiceController(IRentService service)
         {
+            this.service = service;
             
         }
 

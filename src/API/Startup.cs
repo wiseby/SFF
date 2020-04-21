@@ -8,6 +8,8 @@ using Persistence;
 using Application.Products;
 using Application.Customers;
 using Domain;
+using Microsoft.Net.Http.Headers;
+using Application.RentService;
 
 namespace API
 {
@@ -26,19 +28,34 @@ namespace API
             services.AddControllers();
             services.AddScoped<IProductHandler<Movie>, MovieHandler>();
             services.AddScoped<ICustomerHandler<Studio>, StudioHandler>();
-            services.AddDbContext<DataContext>(options => {
+            services.AddSingleton<IRentService, RentService>();
+            services.AddDbContext<DataContext>(options =>
+            {
                 options.UseSqlite(Configuration.GetConnectionString("Sqlite"));
             });
-            services.AddCors(policy => {
+            services.AddCors(policy =>
+            {
                 policy.AddPolicy(
-                    "DefaultCors", 
-                    builder => {
+                    "DefaultCors",
+                    builder =>
+                    {
                         builder
                         .AllowAnyOrigin()
                         .AllowAnyHeader()
                         .AllowAnyMethod();
                     });
             });
+            
+            services.AddMvc(options =>
+            {
+             options.FormatterMappings.SetMediaTypeMappingForFormat
+            ("xml", MediaTypeHeaderValue.Parse("application/xml"));
+            options.FormatterMappings.SetMediaTypeMappingForFormat
+            ("config", MediaTypeHeaderValue.Parse("application/xml"));
+             options.FormatterMappings.SetMediaTypeMappingForFormat
+            ("js", MediaTypeHeaderValue.Parse("application/json"));
+             })
+            .AddXmlSerializerFormatters();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

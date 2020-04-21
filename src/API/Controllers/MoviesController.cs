@@ -67,8 +67,10 @@ namespace API.Controllers
             return Ok(result);
         }
 
-        [HttpDelete("{movieId}/trivias/{triviaId}")]
-        public async Task<ActionResult<ProductDto>> DeleteTrivia(int movieId, int triviaId)
+        [HttpDelete]
+        [Route("{movieId}/trivias/{triviaId}")]
+        public async Task<ActionResult<ProductDto>> DeleteTrivia(
+            [FromRoute] int movieId,[FromRoute] int triviaId)
         {
             var result = await handler.RemoveTrivia(movieId, triviaId);
             return Ok(result);
