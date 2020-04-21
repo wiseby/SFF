@@ -6,10 +6,10 @@ namespace Application.RentService
 {
     public interface IRentService
     {
-        public void Initialize();
-        public Task<InvoiceDto> Rent(Studio customer, Movie product);
-        public Task<InvoiceDto> Return(Studio customer, Movie product);
-        public Task<List<InvoiceDto>> GetInvoicesByStudio(int studioId);
-        public Task<InvoiceDto> GetSingelInvoiceByStudio(int studioId, int orderId);
+        public Task UpdateInvoices();
+        public Task<InvoiceDto> Rent(int customerId, int[] productId);
+        public Task<List<InvoiceLineDto>> Return(int customerId, int[] productId);
+        public List<InvoiceDto> GetInvoicesByStudio(int studioId);
+        public InvoiceDto GetSingelInvoiceByStudio(int studioId, int orderId);
     }
 }

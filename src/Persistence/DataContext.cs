@@ -14,6 +14,7 @@ namespace Persistence
         
         public DbSet<Movie> Movies { get; set;}
         public DbSet<Studio> Studios { get; set;}
+        public DbSet<Invoice> Invoices { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

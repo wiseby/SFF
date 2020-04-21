@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-    public partial class fixedrelations : Migration
+    public partial class InvoiceStudioReferencefix : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -19,6 +19,19 @@ namespace Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Category", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Invoices",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    StudioId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Invoices", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -59,6 +72,29 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "InvoiceLine",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    InvoiceId = table.Column<int>(nullable: false),
+                    ProductId = table.Column<int>(nullable: false),
+                    CreateDate = table.Column<DateTime>(nullable: false),
+                    PurchasePrice = table.Column<float>(nullable: false),
+                    Returned = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_InvoiceLine", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_InvoiceLine_Invoices_InvoiceId",
+                        column: x => x.InvoiceId,
+                        principalTable: "Invoices",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Review",
                 columns: table => new
                 {
@@ -67,7 +103,7 @@ namespace Persistence.Migrations
                     Rating = table.Column<int>(nullable: false),
                     Comment = table.Column<string>(nullable: true),
                     CreateDate = table.Column<DateTime>(nullable: false),
-                    MovieId = table.Column<int>(nullable: true),
+                    MovieId = table.Column<int>(nullable: false),
                     AuthorId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -84,7 +120,7 @@ namespace Persistence.Migrations
                         column: x => x.MovieId,
                         principalTable: "Movies",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -110,14 +146,14 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_InvoiceLine_InvoiceId",
+                table: "InvoiceLine",
+                column: "InvoiceId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Movies_CategoryId",
                 table: "Movies",
                 column: "CategoryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Movies_StudioId",
-                table: "Movies",
-                column: "StudioId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Review_AuthorId",
@@ -138,19 +174,25 @@ namespace Persistence.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "InvoiceLine");
+
+            migrationBuilder.DropTable(
                 name: "Review");
 
             migrationBuilder.DropTable(
                 name: "Trivia");
 
             migrationBuilder.DropTable(
+                name: "Invoices");
+
+            migrationBuilder.DropTable(
+                name: "Studios");
+
+            migrationBuilder.DropTable(
                 name: "Movies");
 
             migrationBuilder.DropTable(
                 name: "Category");
-
-            migrationBuilder.DropTable(
-                name: "Studios");
         }
     }
 }

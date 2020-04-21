@@ -6,7 +6,11 @@ namespace Domain
     {
         public int Id { get; set; }
         public int StudioId { get; set; }
-        public Studio Studio { get; set; }
         public List<InvoiceLine> InvoiceLines { get; set; }
+
+        public Invoice()
+        {
+            InvoiceLines = new List<InvoiceLine>();
+        }
     }
 }

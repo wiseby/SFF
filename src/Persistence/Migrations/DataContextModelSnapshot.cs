@@ -33,6 +33,48 @@ namespace Persistence.Migrations
                     b.ToTable("Category");
                 });
 
+            modelBuilder.Entity("Domain.Invoice", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("StudioId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Invoices");
+                });
+
+            modelBuilder.Entity("Domain.InvoiceLine", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("InvoiceId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<float>("PurchasePrice")
+                        .HasColumnType("REAL");
+
+                    b.Property<bool>("Returned")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InvoiceId");
+
+                    b.ToTable("InvoiceLine");
+                });
+
             modelBuilder.Entity("Domain.Movie", b =>
                 {
                     b.Property<int>("Id")
@@ -131,6 +173,15 @@ namespace Persistence.Migrations
                     b.HasIndex("MovieId");
 
                     b.ToTable("Trivia");
+                });
+
+            modelBuilder.Entity("Domain.InvoiceLine", b =>
+                {
+                    b.HasOne("Domain.Invoice", "Invoice")
+                        .WithMany("InvoiceLines")
+                        .HasForeignKey("InvoiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.Movie", b =>
