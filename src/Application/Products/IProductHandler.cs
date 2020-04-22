@@ -4,15 +4,15 @@ using Domain;
 
 namespace Application.Products
 {
-    public interface IProductHandler<T>
+    public interface IProductHandler<T, U>
     {
         public Task<List<T>> GetAll();
-        public Task<T> GetSingle(int id);
-        public Task<T> Create(T product);
+        public Task<U> GetSingle(int id);
+        public Task<T> Create(U product);
         public Task<T> Delete(int id);
         public Task<T> Update(int id, T product);
-        public Task<T> AddReview(int productId, Review review);
-        public Task<T> AddTrivia(int productId, Trivia trivia);
-        public Task<T> RemoveTrivia(int productId, int triviaId);
+        public Task<ReviewDto> AddReview(int productId, ReviewDto review);
+        public Task<TriviaDto> AddTrivia(int productId, TriviaDto trivia);
+        public Task<TriviaDto> RemoveTrivia(int productId, int triviaId);
     }
 }

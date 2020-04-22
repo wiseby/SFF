@@ -4,10 +4,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
 using Persistence;
 using Application.Products;
 using Application.Customers;
 using Domain;
+using Application;
 
 namespace API
 {
@@ -24,8 +26,9 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddScoped<IProductHandler<Movie>, MovieHandler>();
+            services.AddScoped<IProductHandler<MovieDto, MovieDetailDto>, MovieHandler>();
             services.AddScoped<ICustomerHandler<Studio>, StudioHandler>();
+            services.AddAutoMapper(typeof(MovieHandler));
             services.AddDbContext<DataContext>(options => {
                 options.UseSqlite(Configuration.GetConnectionString("Sqlite"));
             });
