@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Domain;
 using Application.Products;
 using System.Threading.Tasks;
-using AutoMapper;
 using System;
 
 namespace API.Controllers

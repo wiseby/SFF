@@ -9,7 +9,6 @@ using Persistence;
 using Application.Products;
 using Application.Customers;
 using Domain;
-using Application;
 
 namespace API
 {

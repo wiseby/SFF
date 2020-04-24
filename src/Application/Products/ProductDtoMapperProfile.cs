@@ -9,6 +9,8 @@ namespace Application.Products
         {
             CreateMap<Movie, MovieDto>();
             CreateMap<Movie, MovieDetailDto>();
+            CreateMap<Movie, ProductDto>();
+            CreateMap<Movie, ProductDetailDto>();
             CreateMap<Review, ReviewDto>();
             CreateMap<Trivia, TriviaDto>();
         }
