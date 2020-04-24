@@ -4,8 +4,9 @@ namespace Domain
 {
     public class Invoice
     {
+        public int Id { get; set; }
         public int ProductId { get; set; }
-        public IProduct Product { get; set; }
+        public Product Product { get; set; }
         public DateTime CreateDate { get; set; }
     }
 }

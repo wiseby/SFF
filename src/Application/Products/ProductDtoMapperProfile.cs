@@ -7,8 +7,11 @@ namespace Application.Products
     {
         public ProductDtoMapperProfile()
         {
+            CreateMap<CreateMovieDto, Movie>();
             CreateMap<Movie, MovieDto>();
+            CreateMap<MovieDto, Movie>();
             CreateMap<Movie, MovieDetailDto>();
+            CreateMap<MovieDetailDto, Movie>();
             CreateMap<Review, ReviewDto>();
             CreateMap<Trivia, TriviaDto>();
         }

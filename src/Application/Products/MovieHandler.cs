@@ -41,14 +41,7 @@ namespace Application.Products
 
         public async Task<MovieDto> Create(MovieDetailDto product)
         {
-            var movie = new Movie() 
-            {
-                Id = product.Id,
-                Title = product.Title,
-                Category = product.Category,
-                Quantity = product.Quantity,
-                Price = product.Price
-            };
+            var movie = mapper.Map<Movie>(product);
             var result = await context.Movies.AddAsync(movie);
 
             // Save Changes
@@ -97,7 +90,7 @@ namespace Application.Products
                 Rating = review.Rating,
                 Comment = review.Comment,
                 CreateDate = DateTime.Now,
-                AuthorId = review.AuthorId  
+                CustomerId = review.AuthorId  
             };
 
             var movie = await context.Movies.FirstOrDefaultAsync(m => m.Id == movieId);
@@ -109,7 +102,7 @@ namespace Application.Products
             throw new Exception("Problem saving changes!");
         }
 
-        public async Task<TriviaDto> AddTrivia(int movieId, TriviaDto trivia)
+        public async Task<TriviaDto> AddTrivia(TriviaDto trivia)
         {
             var newTrivia = new Trivia()
             {
@@ -118,7 +111,7 @@ namespace Application.Products
                 CreateDate = DateTime.Now,
                 MovieId = trivia.MovieId
             }; 
-            var movie = await GetMovieFromDatabase(movieId);
+            var movie = await GetMovieFromDatabase(trivia.MovieId);
             movie.Trivias.Add(newTrivia);
 
             context.Movies.Update(movie);

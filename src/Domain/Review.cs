@@ -29,7 +29,7 @@ namespace Domain
                 } 
             }
         public DateTime CreateDate { get; set; }
-        public int AuthorId { get; set; }
-        public ICustomer Author { get; set; }
+        public int CustomerId { get; set; }
+        public Customer Customer { get; set; }
     }
 }

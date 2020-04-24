@@ -28,9 +28,10 @@ namespace API
             services.AddControllers();
             services.AddScoped<IProductHandler<MovieDto, MovieDetailDto>, MovieHandler>();
             services.AddScoped<ICustomerHandler<Studio>, StudioHandler>();
-            services.AddAutoMapper(typeof(MovieHandler));
+            services.AddAutoMapper(typeof(StudioHandler));
             services.AddDbContext<DataContext>(options => {
                 options.UseSqlite(Configuration.GetConnectionString("Sqlite"));
+                //options.UseInMemoryDatabase(databaseName: "sff");
             });
             services.AddCors(policy => {
                 policy.AddPolicy(
