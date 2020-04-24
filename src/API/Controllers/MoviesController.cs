@@ -4,6 +4,7 @@ using Domain;
 using Application.Products;
 using System.Threading.Tasks;
 using AutoMapper;
+using System;
 
 namespace API.Controllers
 {
@@ -28,6 +29,7 @@ namespace API.Controllers
         public async Task<ActionResult<MovieDetailDto>> GetMovieById(int id)
         {
             var movie = await handler.GetSingle(id);
+            if(movie == null) { return NotFound(); }
             return Ok(movie);
         }
 
@@ -56,8 +58,15 @@ namespace API.Controllers
         [Route("{movieId}/reviews/")]
         public async Task<ActionResult<Review>> CreateReview(int movieId, ReviewDto review)
         {
-            var result = await handler.AddReview(movieId, review);
-            return Ok(result);
+            try
+            {
+                var result = await handler.AddReview(movieId, review);
+                return Ok(result);
+            }
+            catch(Exception e) 
+            {
+                return ValidationProblem(e.Message);
+            }
         }
 
         [HttpPost]

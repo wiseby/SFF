@@ -30,6 +30,6 @@ namespace Domain
             }
         public DateTime CreateDate { get; set; }
         public int AuthorId { get; set; }
-        public ICustomer Author { get; set; }
+        public Customer Author { get; set; }
     }
 }
